@@ -35,7 +35,39 @@ router.get('/', (req, res) => {
 // get one product
 router.get('/:id', (req, res) => {
   // find a single product by its `id`
-  // be sure to include its associated Category and Tag data
+  Product.findOne({
+    where: {
+      id: req.params.id
+    },
+    attributes: [
+      'id',
+      'product_name',
+      'price',
+      'stock',
+      'category_id'
+    ],
+    include: [
+      {
+        model: Category,
+        attributes: ['category_name']
+      },
+      {
+        model: Tag,
+        attributes: ['tag_name']
+      }
+    ]
+  })
+  .then(productData => {
+    if (!productData) {
+      res.json({message:'No product with the given id number'});
+      return;
+    }
+    res.json(productData)
+  })
+  .catch(err => {
+    console.log(err)
+    res.status(500).json(err)
+  })
 });
 
 // create new product
@@ -70,6 +102,7 @@ router.post('/', (req, res) => {
     });
 });
 
+//TODO: Make updating product without tags not send back 400 status
 // update product
 router.put('/:id', (req, res) => {
   // update product data
