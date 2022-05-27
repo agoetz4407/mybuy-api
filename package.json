@@ -1,5 +1,5 @@
 {
-  "name": "module-13-challenge-orm",
+  "name": "mybuy-api",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -11,18 +11,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@work.github.com:coding-boot-camp/module-13-challenge-orm.git"
+    "url": "git+https://github.com/agoetz4407/mybuy-api.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "nodemon": "^2.0.3"
+  "bugs": {
+    "url": "https://github.com/agoetz4407/mybuy-api/issues"
   },
+  "homepage": "https://github.com/agoetz4407/mybuy-api#readme",
   "dependencies": {
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "mysql2": "^2.1.0",
-    "sequelize": "^5.21.7"
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.20.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
   }
 }
