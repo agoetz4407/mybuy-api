@@ -102,7 +102,6 @@ router.post('/', (req, res) => {
     });
 });
 
-//TODO: Make updating product without tags not send back 400 status
 // update product
 router.put('/:id', (req, res) => {
   // update product data
@@ -135,15 +134,17 @@ router.put('/:id', (req, res) => {
       const productTagsToRemove = productTags
         .filter(({ tag_id }) => !req.body.tagIds.includes(tag_id))
         .map(({ id }) => id);
-
       // run both actions
       return Promise.all([
         ProductTag.destroy({ where: { id: productTagsToRemove } }),
         ProductTag.bulkCreate(newProductTags),
       ]);
     })
-    .then((updatedProductTags) => res.json(updatedProductTags))
+    .then((updatedProductTags) => {
+        res.json(updatedProductTags)
+    })
     .catch((err) => {
+      console.log(err)
       res.status(400).json(err);
     });
 });
